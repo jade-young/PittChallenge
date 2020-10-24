@@ -17,6 +17,21 @@ engage appropriately with emotion
 import random
 import time
 
+class Symptoms:
+    def __init__(self):
+        self.symptoms_dict = {'cough': ['cough,','coughing'],
+                              'headache': ['headache','pounding','head'],
+                              'fever': ['fever','temperature','move'],
+                              'nose': ['stuffy','runny','sneeze','sinus'],
+                              'throat':['throat'],
+                              'stomach':['stomach','bug'],
+                              'back':['back'],
+                              'knee':['knee','knees']
+                              }
+        self.symptoms_list = ['cough,','coughing','headache','pounding','head','fever','temperature','move',
+                              'stuffy','runny','sneeze','sinus','throat','stomach','bug','back','knee','knees'
+                              ]
+
 class Emotions:
     def __init__(self):
         self.emotions_dict = {'sad': ['sad', 'depressed', 'upset', 'desperate', 'angry', 'disgusted', 'frustrated',
@@ -50,8 +65,11 @@ class InteractionLog:
     def __init__(self):
         self.user_name = "Devon"
         self.emotions = Emotions()
+        self.symptoms = Symptoms()
         self.reported_emotions = []
         self.symptoms = {}
+        self.streak =[]
+        self.interaction_number = 0
 
     def get_data(self):
         print("Good Morning, Devon!")
@@ -70,12 +88,80 @@ class InteractionLog:
                 if word.lower() == emotion.lower():
                     # add to reported_emotions
                     self.reported_emotions.append(word.lower())
+        print(self.reported_emotions)
+        for word in self.reported_emotions:
+            """for key in self.emotions.emotions_dict.keys():
+                for emotion in self.emotions.emotions_dict[key]:
+                    if word == emotion:
+                        self.emotions.key += 1"""
+            for emotion in self.emotions.emotions_dict['sad']:
+                if word == emotion:
+                    self.emotions.sad = self.emotions.sad + 1
+                    continue
+            for emotion in self.emotions.emotions_dict['stressed']:
+                if word == emotion:
+                    self.emotions.stressed = self.emotions.stressed + 1
+                    continue
+            for emotion in self.emotions.emotions_dict['happy']:
+                if word == emotion:
+                    self.emotions.happy = self.emotions.happy + 1
+                    continue
+            for emotion in self.emotions.emotions_dict['tired']:
+                if word == emotion:
+                    self.emotions.tired = self.emotions.tired + 1
+                    continue
+            for emotion in self.emotions.emotions_dict['energized']:
+                if word == emotion:
+                    self.emotions.energized += self.emotions.energized + 1
+        print("tallies for each category")
+        print("happy:", self.emotions.happy)
+        print("sad:", self.emotions.sad)
+        print("stressed:", self.emotions.stressed)
+        print("tired:", self.emotions.tired)
+        print("energized:", self.emotions.energized)
+        self.follow_up()
+
+    def follow_up(self):
+        # emotion of the day
+        index = 0
+        max = 0
+        max_category = 0
+        for number in self.stored_data[-1]:
+            if number > max:
+                max = number
+                max_category = index
+            index += 1
+
+        if max_category == 0:
+            self.follow_up_sad()
+        if max_category == 1:
+            self.follow_up_energized()
+        if max_category == 2:
+            self.follow_up_happy()
+        if max_category == 3:
+            self.follow_up_stressed()
+        if max_category == 4:
+            self.follow_up_tired()
+
+        self.streak()
 
 
-    def follow_up_emotion(self):
-        emotion_patterns = []  # categories that have more than 3 tallies
-        # for categories in self.emotions.emotion_dict.keys():
-        # if category counter > 3 then append category to listx
+    def streak(self):
+        # recognize patterns in each emotion/symptom over past few days
+        for category in [0, 1, 2, 3, 4]:
+            if self.stored_data[-1][category]>=1:
+                if self.stored_data[-2][category] >= 1:
+                    if self.stored_data[-3][category] >= 1:
+                        self.streak[category]+=1
+
+        # make user aware of noticed trends
+        if self.streak[0] == 1:
+            print("Ive notice you've been down the past few days.")
+        if self.streak[3] == 1:
+            print("Ive notice you've been stressed the past few days.")
+        if self.streak[4] == 1:
+            print("Ive notice you've been tired the past few days.")
+
 
     def follow_up_happy(self):
         happy_response_list = ["That's great! Enjoy the day!",
@@ -105,17 +191,15 @@ class InteractionLog:
         else:
             print("No worries. Feel free to request a breathing exercise at anytime.")
 
-
     def breathing_exercise(self):
         def hold_1():
             print("...")
             time.sleep(1)
 
         def single_round(i):
-            if i==1:
+            if i == 1:
                 print("Lets begin our breathing exercise.")
                 time.sleep(1)
-
             print("First, breathe in quietly for 4 seconds")
             time.sleep(1)
             hold_1()
