@@ -159,9 +159,9 @@ class InteractionLog:
                         self.streak[category]+=1
 
         for category in [0, 1, 2, 3, 4, 5, 6, 7]:
-            if self.stored_data[-1][category]>=1:
-                if self.stored_data[-2][category] >= 1:
-                    if self.stored_data[-3][category] >= 1:
+            if self.stored_data2[-1][category]>=1:
+                if self.stored_data2[-2][category] >= 1:
+                    if self.stored_data2[-3][category] >= 1:
                         self.symptom_streak[category] += 1 # add variable self.symptom_streak
 
         # make user aware of noticed emotional trends
