@@ -88,6 +88,10 @@ class InteractionLog:
                 if word.lower() == emotion.lower():
                     # add to reported_emotions
                     self.reported_emotions.append(word.lower())
+            for emotion in self.symptoms.symptoms_list:
+                if word.lower() == symptom.lower():
+                    # add to reported_emotions
+                    self.reported_emotions.append(word.lower())
         print(self.reported_emotions)
         for word in self.reported_emotions:
             """for key in self.emotions.emotions_dict.keys():
@@ -154,14 +158,46 @@ class InteractionLog:
                     if self.stored_data[-3][category] >= 1:
                         self.streak[category]+=1
 
-        # make user aware of noticed trends
-        if self.streak[0] == 1:
-            print("Ive notice you've been down the past few days.")
-        if self.streak[3] == 1:
-            print("Ive notice you've been stressed the past few days.")
-        if self.streak[4] == 1:
-            print("Ive notice you've been tired the past few days.")
+        for category in [0, 1, 2, 3, 4, 5, 6, 7]:
+            if self.stored_data[-1][category]>=1:
+                if self.stored_data[-2][category] >= 1:
+                    if self.stored_data[-3][category] >= 1:
+                        self.symptom_streak[category] += 1 # add variable self.symptom_streak
 
+        # make user aware of noticed emotional trends
+        if self.streak[0] == 1:
+            print("Ive noticed you've been down the past few days.")
+        if self.streak[3] == 1:
+            print("Ive noticed you've been stressed the past few days.")
+        if self.streak[4] == 1:
+            print("Ive noticed you've been tired the past few days.")
+
+        # make user aware of noticed symptom patterns
+        # 'cough''headache''fever''nose''throat''stomach''back''knee'
+        if self.symptom_streak[0] == 1:
+            print("Ive noticed you've mentioned having a cough the past few days.")
+            print("I'd recommend seeking a professional's guidance if it continues to bother you.")
+        if self.symptom_streak[1] == 1:
+            print("Ive noticed you've mentioned having a headache the past few days.")
+            print("I'd recommend seeking a professional's guidance if it continues to bother you.")
+        if self.symptom_streak[2] == 1:
+            print("Ive noticed you've mentioned fever-related symptoms the past few days.")
+            print("I'd recommend seeking a professional's guidance if this persists over the next few days")
+        if self.symptom_streak[3] == 1:
+            print("Ive notice you've mentioned nose-related symptoms the past few days.")
+            print("I'd recommend seeking a professional's guidance if it continues to bother you.")
+        if self.symptom_streak[4] == 1:
+            print("Ive noticed you've mentioned throat-related symptoms the past few days.")
+            print("I'd recommend seeking a professional's guidance if it continues to bother you.")
+        if self.symptom_streak[5] == 1:
+            print("Ive noticed you've mentioned your stomach bothering you the past few days.")
+            print("I'd recommend seeking a professional's guidance if it continues to bother you.")
+        if self.symptom_streak[6] == 1:
+            print("Ive noticed you've mentioned your back bothering you the past few days.")
+            print("I'd recommend seeking a professional's guidance if it continues to bother you.")
+        if self.symptom_streak[0] == 1:
+            print("Ive noticed you've mentioned your knees bothering you the past few days.")
+            print("I'd recommend seeking a professional's guidance if it continues to bother you.")
 
     def follow_up_happy(self):
         happy_response_list = ["That's great! Enjoy the day!",
