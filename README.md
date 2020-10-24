@@ -1,5 +1,5 @@
 # PittChallenge
-Project - Intelligient Assistant for General Health
+Project - Intelligient Assistant for General Health (Wesley Wellness)
 
 Ignoring persistent symptoms, emotions, and feelings is an all-too-common 
 phenomenon in our increasingly busy lives. This project is design to keep
