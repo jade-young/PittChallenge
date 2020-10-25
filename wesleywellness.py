@@ -1,19 +1,7 @@
-# pitt challenge
+# Pitt Challenge
 # Project - Intelligient Assistant for General Health
-# mom can we get webmd? we have webmd at home webmd at home: WesleyWellness
+# Jade Young & Devon Smyth
 
-# waits for greeting "Good morning, Wesley!"
-# introduction
-# how are you feeling today?
-# starts interaction
-"""
-Wesley sorts the response into groups
-follow up on previously identified patterns (how far back?)
-if user only reports symptoms, for example, Wesley inquires about emotions
-engage appropriately with emotion
-    ex. stressed: "would you like to do a breathing exercise?"
-"""
-# logs interaction
 import random
 import time
 
